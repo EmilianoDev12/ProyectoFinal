@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/agregarExpediente.css">
+    <title>Expediente Médico</title>
+</head>
+<body>
+
+    <div class="fondo">
+        <svg width="100%" viewBox="0 0 1151 699" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M236.5 473.5C105.3 474.7 47.6667 547.333 0.5 590V698.5H357.5H1150L1150.5 74.5V-0.5C1128.67 17.5 1116.7 -6.71215 1054 60.5C991.5 127.5 1048 221.5 852 248C704.157 267.989 645.292 395.932 571.5 448C464.5 523.5 400.5 472 236.5 473.5Z" fill="url(#paint0_linear_90:184)"/>
+            <defs>
+            <linearGradient id="paint0_linear_90:184" x1="575.5" y1="-0.5" x2="575.5" y2="698.5" gradientUnits="userSpaceOnUse">
+            <stop offset="0.208333" stop-color="#E71717"/>
+            <stop offset="0.697917" stop-color="#BC0808"/>
+            <stop offset="0.90625" stop-color="#AC173B"/>
+            </linearGradient>
+            </defs>
+        </svg>    
+    </div>
+
+    <p id="titulo">EXPEDIENTE MÉDICO</p>
+    <% console.log(Ant); %> 
+    <div class="tarjeta" id="tarjeta-1">
+        <p class="subtitulos">Ficha de Indentificación</p>
+        <div id="perfil-container" ><img id="perfil" src="./img/perfil.jpg"></div>
+        <form action="/cargarExpediente" method="post">
+            <input name="IdPac" type="hidden" value="<%= IdPac %> ">
+            <input name="Nombres" type="text" class="ct" id="ct1" placeholder="Nombre(s)" <% if(Fich.Nombres != null) {%>value="<%= Fich.Nombres %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %> >
+            <input name="Apm" type="text" class="ct" id="ct2" placeholder="Apellido materno" <% if(Fich.Apm != null) {%>value="<%= Fich.Apm %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %>>
+            <input name="App" type="text" class="ct" id="ct3" placeholder="Apellido paterno" <% if(Fich.App != null) {%>value="<%= Fich.App %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %>>
+            <select name="Sexo" id="selector-1" class="campos" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Fich.Sexo == "F") {%>selected<% } %> value="F">Femenino</option>
+                <option <% if(Fich.Sexo == "M") {%>selected<% } %> value="M">Masculino</option>
+            </select>
+            <p id="fechanac">Fecha de nacimiento</p>
+            <p><input name="Fecha" type="date" class="ct" id="ct4" placeholder="Fecha" <% if(Fich.Dia != null) {%>value="<%=Fich.Ano%>-<%=Fich.Mes%>-<%=Fich.Dia%>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>></p>
+
+            <input name="Ocupacion" type="text" class="ct" id="ct5" placeholder="Ocupación" <% if(Fich.Ocupacion != null) {%>value="<%= Fich.Ocupacion %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
+            <p id="latera">Lateralidad</p>
+            <select name="Lateralidad" id="selector-2" class="campos"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Fich.Sexo == "Z") {%>selected<% } %> value="Z">Zurda</option>
+                <option <% if(Fich.Sexo == "D") {%>selected<% } %> value="D">Diestra</option>
+                <option <% if(Fich.Sexo == "I") {%>selected<% } %> value="I">Invertida</option>
+                <option <% if(Fich.Sexo == "A") {%>selected<% } %> value="A">Ambidiestra</option>
+                <option <% if(Fich.Sexo == "C") {%>selected<% } %> value="C">Cruzada</option>
+            </select>
+
+            <input name="Religion" type="text" class="ct" id="ct6" placeholder="Religión" <% if(Fich.Religion != null) {%>value="<%= Fich.Religion %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
+            <input name="TelefonoCel" type="text" class="ct" id="ct7" placeholder="Teléfono celular" <% if(Fich.TelefonoCel != null) {%>value="<%= Fich.TelefonoCel %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
+            <p id="nacio">Nacionalidad</p>
+            <select name="Nacionalidad" id="selector-3" class="campos"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Fich.Sexo == "MEX") {%>selected<% } %> value="MEX">Mexicana</option>
+            </select>
+            <!--<select name="TipoSangrePac" id="selector-2" class="campos">
+                <option value="F">O negativo</option>
+                <option value="M">O positivo</option>
+                <option value="F">A negativo</option>
+                <option value="M">A positivo</option>
+                <option value="F">B negativo</option>
+                <option value="M">B positivo</option>
+                <option value="F">AB negativo</option>
+                <option value="M">AB positivo</option>
+            </select>-->
+            <% if(Tipo == "Siu") {%> 
+            <button type="submit" class="boton" id="boton-1">Guardar</button>
+            <% } %> 
+        </form>
+    </div>
+
+    <div id="tarjeta-2" class="tarjeta">
+        <p class="subtitulos" id="subtitulo-2">antecedentes heredofamiliares</p>
+
+        <p id="col1">ENFERMEDADES</p>
+        <form action="/cargarAntecedentes" method="post">
+            <input name="IdPac" type="hidden" value="<%= IdPac %> ">
+            <p id="enfermedades" class="enfermedades">Neoplasias</p>
+            <p class="enfermedades">Diabetes</p>
+            <p class="enfermedades">Artritis</p>
+            <p class="enfermedades">Cardiopatías</p>
+            <p class="enfermedades">Enfermedades neurológicas</p>
+            <p class="enfermedades">Transtornos psiquiátricos</p>
+            <p class="enfermedades">Enfermedades respiratorias</p>
+            <p class="enfermedades">Hepatopatías</p>
+            <p class="enfermedades">Hipertensión</p>
+            <p class="enfermedades">Otro</p>
+
+            
+            <p id="col2">PARENTESCO</p>
+
+            <select name="FDia" id="selector-4" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FDia == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FDia == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FDia == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FDia == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FAr" id="selector-5" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FAr == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FAr == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FAr == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FAr == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FCar" id="selector-6" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FCar == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FCar == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FCar == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FCar == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FNeur" id="selector-7" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FNeur == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FNeur == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FNeur == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FNeur == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FPsi" id="selector-8" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FPsi == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FPsi == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FPsi == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FPsi == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FResp" id="selector-9" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FResp == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FResp == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FResp == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FResp == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FHep" id="selector-11" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FHep == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FHep == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FHep == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FHep == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FHip" id="selector-12" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FHip == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FHip == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FHip == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FHip == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FOtr" id="selector-13" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FOtr == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FOtr == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FOtr == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FOtr == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+            <select name="FNeo" id="selector-25" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.FNeo == "FP") {%>selected<% } %> value="FP">Familiares de primer grado</option>
+                <option <% if(Ant.FNeo == "FS") {%>selected<% } %> value="FS">Familiares de segundo grado</option>
+                <option <% if(Ant.FNeo == "FT") {%>selected<% } %> value="FT">Familiares de tercer grado</option>
+                <option <% if(Ant.FNeo == "N") {%>selected<% } %> value="N">Ninguno</option>
+            </select>
+
+
+            <p id="col3">ESTADO</p>
+
+            <select name="EDia" id="selector-14" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EDia == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EDia == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EAr" id="selector-15" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EAr == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EAr == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="ECar" id="selector-16" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.ECar == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.ECar == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="ENeur" id="selector-17" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.ENeur == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.ENeur == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EPsi" id="selector-18" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EPsi == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EPsi == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EResp" id="selector-19" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EResp == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EResp == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EHep" id="selector-21" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EHep == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EHep == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EHip" id="selector-22" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EHip == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EHip == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="EOtr" id="selector-23" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.EOtr == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.EOtr == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <select name="ENeo" id="selector-24" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(Ant.ENeo == "V") {%>selected<% } %> value="V">Vivo</option>
+                <option <% if(Ant.ENeo == "F") {%>selected<% } %> value="F">Finado</option>
+            </select>
+            <% if(Tipo == "Siu") {%> 
+                <button type="submit" class="boton" id="boton-2">Guardar</button>
+            <% } %> 
+        </form>
+    </div>
+    <div id="tarjeta-4" class="tarjeta">
+        <p class="subtitulos" id="subtitulo-3">antecedentes no patologógicos</p>
+        <p id="col5">ALIMENTACIÓN</p>
+        <form action="/cargarExpediente" method="post" enctype="multipart/form-data">
+        <p id="numcomidas">Número de comidas al día</p>
+        <select name="Comidas" id="selector-26" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">8</option>
+            <option value="M">9</option>
+            <option value="M">10</option>
+        </select>
+        <p id="cantidadcomidas">Cantidad de consumo</p>
+        <select name="Cantidad" id="selector-27" class="selectornew">
+            <option value="F">Muy Poco</option>
+            <option value="F">Poco</option>
+            <option value="M">Elemental</option>
+            <option value="M">Adecuado</option>
+            <option value="M">Mucho</option>
+            <option value="M">Demasiado</option>
+        </select>
+        <p id="horariosadecuados">Horarios de alimentación adecuados</p>
+        <select name="Horarios de alimentación adecuados" id="selector-28" class="selectornew">
+            <option value="F">Sí</option>
+            <option value="M">No</option>
+        </select>
+
+        <p id="col6">BEBIDA</p>
+        <p id="numbebida">Litros de agua al día</p>
+        <select name="Comidas" id="selector-29" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">8</option>
+            <option value="M">9</option>
+            <option value="M">10</option>
+            <option value="M">Más de 10</option>
+        </select>
+        <p id="col7">HABITACIÓN</p>
+        <p id="aguapotable">Agua Potable</p>
+        <select name="Comidas" id="selector-31" class="selectornew">
+            <option value="F">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="drenaje">Drenaje</p>
+        <select name="Comidas" id="selector-32" class="selectornew">
+            <option value="F">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="gas">Gas</p>
+        <select name="Comidas" id="selector-33" class="selectornew">
+            <option value="F">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="col8">HÁBITOS HIGÉNICOS</p>
+        <p id="bano">Baño por semana</p>
+        <select name="bano" id="selector-34" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">Más de 7</option>
+        </select>
+        <p id="manos">Lavado de manos al día</p>
+        <select name="manos" id="selector-35" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">Más de 7</option>
+        </select>
+        <p id="bucal">Higiene bucal al día</p>
+        <select name="boca" id="selector-36" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">Más de 7</option>
+        </select>
+        <p id="actividad">Actividad física por semana</p>
+        <select name="ejercicio" id="selector-37" class="selectornew">
+            <option value="F">1</option>
+            <option value="M">2</option>
+            <option value="M">3</option>
+            <option value="M">4</option>
+            <option value="M">5</option>
+            <option value="M">6</option>
+            <option value="M">7</option>
+            <option value="M">Más de 7</option>
+            <option value="M">Ninguna de las anteriores</option>
+        </select>
+
+        <p id="col9">TOXICOMANÍAS</p>
+        <p id="alcohol">Alcoholismo</p>
+        <select name="bano" id="selector-41" class="selectornew">
+            <option value="M">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="tabaco">Tabaquismo</p>
+        <select name="manos" id="selector-42" class="selectornew">
+            <option value="M">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="droga">Drogadicción</p>
+        <select name="boca" id="selector-43" class="selectornew">
+            <option value="M">Sí</option>
+            <option value="M">No</option>
+        </select>
+        <p id="otro">Otro</p>
+        <input name="telefono" type="text" class="ct" id="ct12" placeholder="Otro">
+        <button type="submit" class="boton" id="boton-3">Guardar</button>
+
+    </div>
+    </form>
+    <div id="tarjeta-3" class="tarjeta">
+        
+    </div>
+
+    <script src="./js/cargarArchivos.js"></script>
+</body>
+</html>
