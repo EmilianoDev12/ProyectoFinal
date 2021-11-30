@@ -159,11 +159,15 @@ module.exports = {
                 const Tipo = "Siu";
                 expediente.buscarAnt(con,req.body.IdPac, function (err, dato) {
                     const Ant = dato[0];
-                    res.render('agregarExpediente', {
-                        Fich,
-                        IdPac,
-                        Tipo,
-                        Ant
+                    expediente.buscarAntNo(con,req.body.IdPac, function (err, datos) {
+                        const AntNo = datos[0];
+                        res.render('agregarExpediente', {
+                            Fich,
+                            IdPac,
+                            Tipo,
+                            Ant,
+                            AntNo
+                        });
                     });
                 });
             });
@@ -189,6 +193,17 @@ module.exports = {
         }else {
             console.log(req.body);
             expediente.actualizarAnt(con,req.body.IdPac, req.body, function (err) {
+                console.log(err);
+                res.redirect('/pantallaInicial');
+            });
+        }
+    },
+    cargarNo:function (req, res, next) {
+        if(req.body.IdPac == undefined){
+            res.redirect('/isPaciente');
+        }else {
+            console.log(req.body);
+            expediente.actualizarAntNo(con,req.body.IdPac,req.body, function (err) {
                 console.log(err);
                 res.redirect('/pantallaInicial');
             });

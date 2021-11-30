@@ -24,7 +24,7 @@
     </div>
 
     <p id="titulo">EXPEDIENTE MÉDICO</p>
-    <% console.log(Ant); %> 
+    <% console.log(AntNo); %> 
     <div class="tarjeta" id="tarjeta-1">
         <p class="subtitulos">Ficha de Indentificación</p>
         <div id="perfil-container" ><img id="perfil" src="./img/perfil.jpg"></div>
@@ -204,135 +204,137 @@
     <div id="tarjeta-4" class="tarjeta">
         <p class="subtitulos" id="subtitulo-3">antecedentes no patologógicos</p>
         <p id="col5">ALIMENTACIÓN</p>
-        <form action="/cargarExpediente" method="post" enctype="multipart/form-data">
-        <p id="numcomidas">Número de comidas al día</p>
-        <select name="Comidas" id="selector-26" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">8</option>
-            <option value="M">9</option>
-            <option value="M">10</option>
-        </select>
-        <p id="cantidadcomidas">Cantidad de consumo</p>
-        <select name="Cantidad" id="selector-27" class="selectornew">
-            <option value="F">Muy Poco</option>
-            <option value="F">Poco</option>
-            <option value="M">Elemental</option>
-            <option value="M">Adecuado</option>
-            <option value="M">Mucho</option>
-            <option value="M">Demasiado</option>
-        </select>
-        <p id="horariosadecuados">Horarios de alimentación adecuados</p>
-        <select name="Horarios de alimentación adecuados" id="selector-28" class="selectornew">
-            <option value="F">Sí</option>
-            <option value="M">No</option>
-        </select>
+        <form action="/cargarNo" method="post">
+            <input name="IdPac" type="hidden" value="<%= IdPac %> ">
+            <p id="numcomidas">Número de comidas al día</p>
+            <select name="NCom" id="selector-26" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Ncom == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.Ncom == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.Ncom == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.Ncom == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.Ncom == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.Ncom == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.Ncom == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.Ncom == "8") {%>selected<% } %> value="8">8</option>
+                <option <% if(AntNo.Ncom == "9") {%>selected<% } %> value="9">9</option>
+                <option <% if(AntNo.Ncom == "10") {%>selected<% } %> value="10">10</option>
+            </select>
+            <p id="cantidadcomidas">Cantidad de consumo</p>
+            <select name="CCom" id="selector-27" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.CCom == "MP") {%>selected<% } %> value="MP">Muy Poco</option>
+                <option <% if(AntNo.CCom == "P") {%>selected<% } %> value="P">Poco</option>
+                <option <% if(AntNo.CCom == "E") {%>selected<% } %> value="E">Elemental</option>
+                <option <% if(AntNo.CCom == "A") {%>selected<% } %> value="A">Adecuado</option>
+                <option <% if(AntNo.CCom == "M") {%>selected<% } %> value="M">Mucho</option>
+                <option <% if(AntNo.CCom == "D") {%>selected<% } %> value="D">Demasiado</option>
+            </select>
+            <p id="horariosadecuados">Horarios de alimentación adecuados</p>
+            <select name="HoraCom" id="selector-28" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>> 
+                <option <% if(AntNo.HoraCom == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.HoraCom == "n") {%>selected<% } %> value="n">No</option>
+            </select>
 
-        <p id="col6">BEBIDA</p>
-        <p id="numbebida">Litros de agua al día</p>
-        <select name="Comidas" id="selector-29" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">8</option>
-            <option value="M">9</option>
-            <option value="M">10</option>
-            <option value="M">Más de 10</option>
-        </select>
-        <p id="col7">HABITACIÓN</p>
-        <p id="aguapotable">Agua Potable</p>
-        <select name="Comidas" id="selector-31" class="selectornew">
-            <option value="F">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="drenaje">Drenaje</p>
-        <select name="Comidas" id="selector-32" class="selectornew">
-            <option value="F">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="gas">Gas</p>
-        <select name="Comidas" id="selector-33" class="selectornew">
-            <option value="F">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="col8">HÁBITOS HIGÉNICOS</p>
-        <p id="bano">Baño por semana</p>
-        <select name="bano" id="selector-34" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">Más de 7</option>
-        </select>
-        <p id="manos">Lavado de manos al día</p>
-        <select name="manos" id="selector-35" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">Más de 7</option>
-        </select>
-        <p id="bucal">Higiene bucal al día</p>
-        <select name="boca" id="selector-36" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">Más de 7</option>
-        </select>
-        <p id="actividad">Actividad física por semana</p>
-        <select name="ejercicio" id="selector-37" class="selectornew">
-            <option value="F">1</option>
-            <option value="M">2</option>
-            <option value="M">3</option>
-            <option value="M">4</option>
-            <option value="M">5</option>
-            <option value="M">6</option>
-            <option value="M">7</option>
-            <option value="M">Más de 7</option>
-            <option value="M">Ninguna de las anteriores</option>
-        </select>
+            <p id="col6">BEBIDA</p>
+            <p id="numbebida">Litros de agua al día</p>
+            <select name="LitrosA" id="selector-29" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.LitrosA == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.LitrosA == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.LitrosA == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.LitrosA == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.LitrosA == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.LitrosA == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.LitrosA == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.LitrosA == "8") {%>selected<% } %> value="8">8</option>
+                <option <% if(AntNo.LitrosA == "9") {%>selected<% } %> value="9">9</option>
+                <option <% if(AntNo.LitrosA == "10") {%>selected<% } %> value="10">10</option>
+                <option <% if(AntNo.LitrosA == "11") {%>selected<% } %> value="11">Más de 10</option>
+            </select>
+            <p id="col7">HABITACIÓN</p>
+            <p id="aguapotable">Agua Potable</p>
+            <select name="AguaPot" id="selector-31" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.AguaPot == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.AguaPot == "n") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="drenaje">Drenaje</p>
+            <select name="Drenaje" id="selector-32" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Drenaje == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.Drenaje == "n") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="gas">Gas</p>
+            <select name="Gas" id="selector-33" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Gas == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.Gas == "s") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="col8">HÁBITOS HIGÉNICOS</p>
+            <p id="bano">Baño por semana</p>
+            <select name="Bano" id="selector-34" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Bano == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.Bano == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.Bano == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.Bano == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.Bano == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.Bano == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.Bano == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.Bano == "8") {%>selected<% } %> value="8">Más de 7</option>
+            </select>
+            <p id="manos">Lavado de manos al día</p>
+            <select name="Manos" id="selector-35" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Manos == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.Manos == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.Manos == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.Manos == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.Manos == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.Manos == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.Manos == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.Manos == "8") {%>selected<% } %> value="8">Más de 7</option>
+            </select>
+            <p id="bucal">Higiene bucal al día</p>
+            <select name="Boca" id="selector-36" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Boca == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.Boca == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.Boca == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.Boca == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.Boca == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.Boca == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.Boca == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.Boca == "8") {%>selected<% } %> value="8">Más de 7</option>
+            </select>
+            <p id="actividad">Actividad física por semana</p>
+            <select name="Ejercicio" id="selector-37" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Ejercicio == "1") {%>selected<% } %> value="1">1</option>
+                <option <% if(AntNo.Ejercicio == "2") {%>selected<% } %> value="2">2</option>
+                <option <% if(AntNo.Ejercicio == "3") {%>selected<% } %> value="3">3</option>
+                <option <% if(AntNo.Ejercicio == "4") {%>selected<% } %> value="4">4</option>
+                <option <% if(AntNo.Ejercicio == "5") {%>selected<% } %> value="5">5</option>
+                <option <% if(AntNo.Ejercicio == "6") {%>selected<% } %> value="6">6</option>
+                <option <% if(AntNo.Ejercicio == "7") {%>selected<% } %> value="7">7</option>
+                <option <% if(AntNo.Ejercicio == "8") {%>selected<% } %> value="8">Más de 7</option>
+                <option <% if(AntNo.Ejercicio == "9") {%>selected<% } %> value="9">Ninguna de las anteriores</option>
+            </select>
 
-        <p id="col9">TOXICOMANÍAS</p>
-        <p id="alcohol">Alcoholismo</p>
-        <select name="bano" id="selector-41" class="selectornew">
-            <option value="M">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="tabaco">Tabaquismo</p>
-        <select name="manos" id="selector-42" class="selectornew">
-            <option value="M">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="droga">Drogadicción</p>
-        <select name="boca" id="selector-43" class="selectornew">
-            <option value="M">Sí</option>
-            <option value="M">No</option>
-        </select>
-        <p id="otro">Otro</p>
-        <input name="telefono" type="text" class="ct" id="ct12" placeholder="Otro">
-        <button type="submit" class="boton" id="boton-3">Guardar</button>
-
+            <p id="col9">TOXICOMANÍAS</p>
+            <p id="alcohol">Alcoholismo</p>
+            <select name="Alcoho" id="selector-41" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Alcoho == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.Alcoho == "n") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="tabaco">Tabaquismo</p>
+            <select name="Taba" id="selector-42" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Taba == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.Taba == "n") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="droga">Drogadicción</p>
+            <select name="Droga" id="selector-43" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
+                <option <% if(AntNo.Droga == "s") {%>selected<% } %> value="s">Sí</option>
+                <option <% if(AntNo.Droga == "n") {%>selected<% } %> value="n">No</option>
+            </select>
+            <p id="otro">Otro</p>
+            <input name="Otro" type="text" class="ct" id="ct12" placeholder="Otro" <% if(AntNo.Otro != null) {%>value="<%= AntNo.Otro %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
+            <% if(Tipo == "Siu") {%> 
+                <button type="submit" class="boton" id="boton-3">Guardar</button>
+            <% } %>
+        </form>
     </div>
-    </form>
     <div id="tarjeta-3" class="tarjeta">
         
     </div>

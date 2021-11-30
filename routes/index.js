@@ -70,4 +70,6 @@ router.post('/cargarExpediente', medController.cargarExpediente);
 
 router.post('/cargarAntecedentes', medController.cargarAntecedentes);
 
+router.post('/cargarNo', medController.cargarNo);
+
 module.exports = router;

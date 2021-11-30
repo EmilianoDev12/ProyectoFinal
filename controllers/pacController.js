@@ -44,9 +44,11 @@ module.exports = {
                                         if (!err) {
                                             console.log("Guardao");
                                             expediente.registrarAnt(con,datos[datos.length - 1].IdPac,function (err) {
-                                                if(!err) {
-                                                    res.redirect('/isPaciente');
-                                                }
+                                                expediente.registrarAntNo(con,datos[datos.length - 1].IdPac,function (err) {
+                                                    if(!err) {
+                                                        res.redirect('/isPaciente');
+                                                    } 
+                                                });
                                             });
                                         }else  {
                                             res.redirect('/rPaciente');
@@ -184,11 +186,15 @@ module.exports = {
                 const Tipo = req.session.MUsuario.TipoUsu;
                 expediente.buscarAnt(con,IdPac, function (err, dato) {
                     const Ant = dato[0];
-                    res.render('agregarExpediente', {
-                        Fich,
-                        IdPac,
-                        Tipo,
-                        Ant
+                    expediente.buscarAntNo(con,IdPac, function (err, datos) {
+                        const AntNo = datos[0];
+                        res.render('agregarExpediente', {
+                            Fich,
+                            IdPac,
+                            Tipo,
+                            Ant,
+                            AntNo
+                        });
                     });
                 });
             });
