@@ -24,15 +24,18 @@
     </div>
 
     <p id="titulo">EXPEDIENTE MÉDICO</p>
-    <% console.log(AntNo); %> 
     <div class="tarjeta" id="tarjeta-1">
-        <p class="subtitulos">Ficha de Indentificación</p>
+        <p class="subtitulos"><a  name="primero"/>Ficha de Indentificación</p>
         <div id="perfil-container" ><img id="perfil" src="./img/perfil.jpg"></div>
-        <form action="/cargarExpediente" method="post">
+        <form action="/cargarExpediente" onsubmit="return validar();" method="post">
             <input name="IdPac" type="hidden" value="<%= IdPac %> ">
+            <p id="nombres">Nombre(s)</p>
             <input name="Nombres" type="text" class="ct" id="ct1" placeholder="Nombre(s)" <% if(Fich.Nombres != null) {%>value="<%= Fich.Nombres %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %> >
+            <p id="apellidom">Apellido materno</p>
             <input name="Apm" type="text" class="ct" id="ct2" placeholder="Apellido materno" <% if(Fich.Apm != null) {%>value="<%= Fich.Apm %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %>>
+            <p id="apellidop">Apellido paterno</p>
             <input name="App" type="text" class="ct" id="ct3" placeholder="Apellido paterno" <% if(Fich.App != null) {%>value="<%= Fich.App %>"<% } %> <% if(Tipo != "Siu") {%>readonly<% } %>>
+            <p id="sexo">Sexo</p>
             <select name="Sexo" id="selector-1" class="campos" <% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Fich.Sexo == "F") {%>selected<% } %> value="F">Femenino</option>
                 <option <% if(Fich.Sexo == "M") {%>selected<% } %> value="M">Masculino</option>
@@ -40,6 +43,7 @@
             <p id="fechanac">Fecha de nacimiento</p>
             <p><input name="Fecha" type="date" class="ct" id="ct4" placeholder="Fecha" <% if(Fich.Dia != null) {%>value="<%=Fich.Ano%>-<%=Fich.Mes%>-<%=Fich.Dia%>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>></p>
 
+            <p id="ocupacion">Ocupación</p>
             <input name="Ocupacion" type="text" class="ct" id="ct5" placeholder="Ocupación" <% if(Fich.Ocupacion != null) {%>value="<%= Fich.Ocupacion %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
             <p id="latera">Lateralidad</p>
             <select name="Lateralidad" id="selector-2" class="campos"<% if(Tipo != "Siu") {%>disabled<% } %>>
@@ -50,7 +54,9 @@
                 <option <% if(Fich.Sexo == "C") {%>selected<% } %> value="C">Cruzada</option>
             </select>
 
+            <p id="religion">Religión</p>
             <input name="Religion" type="text" class="ct" id="ct6" placeholder="Religión" <% if(Fich.Religion != null) {%>value="<%= Fich.Religion %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
+            <p id="cel">Teléfono celular</p>
             <input name="TelefonoCel" type="text" class="ct" id="ct7" placeholder="Teléfono celular" <% if(Fich.TelefonoCel != null) {%>value="<%= Fich.TelefonoCel %>"<% } %><% if(Tipo != "Siu") {%>readonly<% } %>>
             <p id="nacio">Nacionalidad</p>
             <select name="Nacionalidad" id="selector-3" class="campos"<% if(Tipo != "Siu") {%>disabled<% } %>>
@@ -73,10 +79,10 @@
     </div>
 
     <div id="tarjeta-2" class="tarjeta">
-        <p class="subtitulos" id="subtitulo-2">antecedentes heredofamiliares</p>
+        <p class="subtitulos" id="subtitulo-2"><a  name="segundo"/>antecedentes heredofamiliares</p>
 
         <p id="col1">ENFERMEDADES</p>
-        <form action="/cargarAntecedentes" method="post">
+        <form action="/cargarAntecedentes" onsubmit="return validarTres();" method="post">
             <input name="IdPac" type="hidden" value="<%= IdPac %> ">
             <p id="enfermedades" class="enfermedades">Neoplasias</p>
             <p class="enfermedades">Diabetes</p>
@@ -159,42 +165,52 @@
             <select name="EDia" id="selector-14" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EDia == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EDia == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EAr" id="selector-15" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EAr == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EAr == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="ECar" id="selector-16" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.ECar == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.ECar == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="ENeur" id="selector-17" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.ENeur == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.ENeur == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EPsi" id="selector-18" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EPsi == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EPsi == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EResp" id="selector-19" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EResp == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EResp == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EHep" id="selector-21" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EHep == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EHep == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EHip" id="selector-22" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EHip == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EHip == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="EOtr" id="selector-23" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.EOtr == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.EOtr == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <select name="ENeo" id="selector-24" class="selectornew"<% if(Tipo != "Siu") {%>disabled<% } %>>
                 <option <% if(Ant.ENeo == "V") {%>selected<% } %> value="V">Vivo</option>
                 <option <% if(Ant.ENeo == "F") {%>selected<% } %> value="F">Finado</option>
+                <option value="M">-</option>
             </select>
             <% if(Tipo == "Siu") {%> 
                 <button type="submit" class="boton" id="boton-2">Guardar</button>
@@ -202,9 +218,9 @@
         </form>
     </div>
     <div id="tarjeta-4" class="tarjeta">
-        <p class="subtitulos" id="subtitulo-3">antecedentes no patologógicos</p>
+        <p class="subtitulos" id="subtitulo-3"><a name="tercero"/>antecedentes no patologógicos</p>
         <p id="col5">ALIMENTACIÓN</p>
-        <form action="/cargarNo" method="post">
+        <form action="/cargarNo" onsubmit="return validarDos();" method="post">
             <input name="IdPac" type="hidden" value="<%= IdPac %> ">
             <p id="numcomidas">Número de comidas al día</p>
             <select name="NCom" id="selector-26" class="selectornew" <% if(Tipo != "Siu") {%>disabled<% } %>>
@@ -336,9 +352,119 @@
         </form>
     </div>
     <div id="tarjeta-3" class="tarjeta">
-        
+        <a class="boton" id="boton-11" href="#primero">Ficha de Indentificación</a>
+        <a class="boton" id="boton-22" href="#segundo">Antecedentes Heredofamiliares</a>
+        <a class="boton" id="boton-33" href="#tercero">Antecedentes no Patologógicos</a>
+    </div>
+    <!--ALERTS-->
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="vacio" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Campos vacíos</strong>
+    
+            <button type="button" id="close-1" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Favor de llenar todos los campos.
+        </div>
+        </div>
+    </div>
+
+    
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Nombre" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Nombre</strong>
+    
+            <button type="button" id="close-5" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Use mayúscula en las parte correspondiente.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Apellidos" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Apellido</strong>
+    
+            <button type="button" id="close-6" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Use mayúscula en la parte correspondiente.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Ocupacion" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Ocupación</strong>
+    
+            <button type="button" id="close-6" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Evite usar números y carácteres especiales.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Religion" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Religión</strong>
+    
+            <button type="button" id="close-6" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Evite usar números y carácteres especiales.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Celular" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Celular</strong>
+    
+            <button type="button" id="close-6" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Teléfono celular inválido.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="Otro" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong"> Otro</strong>
+    
+            <button type="button" id="close-6" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            Evite usar números y carácteres especiales.
+        </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3 " id="container-alerts" style="z-index: 11">
+        <div id="invalido" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header fas fa-exclamation-circle" id="alerta">
+            <strong class="me-auto" id="strong">Selección Inválida</strong>
+    
+            <button type="button" id="close-4" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="body">
+            El "PARENTESCO" o "ESTADO" de alguno de sus campos es inválido.
+        </div>
+        </div>
     </div>
 
     <script src="./js/cargarArchivos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="./js/validarExpedinte.js"></script>
 </body>
 </html>
